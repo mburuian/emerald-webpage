@@ -1,113 +1,102 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 export default function Home() {
   return (
     <main className="space-y-16 p-6 md:p-12 max-w-6xl mx-auto text-gray-800">
       
-     <section id="about" className="bg-white py-16 px-6 md:px-12 max-w-5xl mx-auto">
-  <h2 className="text-3xl font-serif font-bold text-[#6a4a2e] mb-6 text-center">
-    About Emerald Counselling
-  </h2>
+      {/* About Section */}
+      <section id="about" className="bg-white py-16 px-6 md:px-12 max-w-5xl mx-auto">
+        <h2 className="text-3xl font-serif font-bold text-[#6a4a2e] mb-6 text-center">
+          About Emerald Counselling
+        </h2>
 
-  <div className="flex flex-col md:flex-row items-center gap-10">
-    {/* Text Content */}
-    <div className="md:w-2/3 text-gray-700 leading-relaxed text-lg font-light">
-      <p>
-        At Emerald Counselling, we believe everyone deserves a safe space to be heard and supported. Our mission is to empower you through compassionate care tailored to your unique journey.
-      </p>
-      <p className="mt-4">
-        Whether you're facing life’s challenges, seeking personal growth, or simply want someone to talk to, our dedicated team is here to listen without judgment and guide you towards healing.
-      </p>
-      <p className="mt-4">
-        We blend evidence-based therapies with empathy and respect, creating a nurturing environment where you can rediscover hope, resilience, and inner peace.
-      </p>
-    </div>
+        <div className="flex flex-col md:flex-row items-center gap-10">
+          <div className="md:w-2/3 text-gray-700 leading-relaxed text-lg font-light">
+            <p>
+              At Emerald Counselling, we believe everyone deserves a safe space to be heard and supported. Our mission is to empower you through compassionate care tailored to your unique journey.
+            </p>
+            <p className="mt-4">
+              Whether you&apos;re facing life&apos;s challenges, seeking personal growth, or simply want someone to talk to, our dedicated team is here to listen without judgment and guide you towards healing.
+            </p>
+            <p className="mt-4">
+              We blend evidence-based therapies with empathy and respect, creating a nurturing environment where you can rediscover hope, resilience, and inner peace.
+            </p>
+          </div>
 
-    {/* Placeholder for an image */}
-    <div className="md:w-1/3">
-      <img
-        src="/istockphoto-1342251913-1024x1024.jpg" 
-        alt="Counselling session" 
-        className="rounded-lg shadow-lg object-cover w-full h-64 md:h-full"
-      />
-      {/* Replace '/about-image.jpg' with your actual image */}
-    </div>
-  </div>
-</section>
+          <div className="md:w-1/3">
+            <Image
+              src="/istockphoto-1342251913-1024x1024.jpg"
+              alt="Counselling session"
+              className="rounded-lg shadow-lg object-cover"
+              width={400}
+              height={400}
+            />
+          </div>
+        </div>
+      </section>
 
+      {/* Services Section */}
+      <section id="services" className="bg-[#fff8ec] py-16 px-6 md:px-12 max-w-6xl mx-auto">
+        <h2 className="text-3xl font-serif font-bold text-[#6a4a2e] mb-4 text-center">
+          Our Services
+        </h2>
+        <p className="text-center text-[#5c3b22] max-w-3xl mx-auto mb-10 text-lg font-light">
+          Discover a path to emotional clarity and personal growth with Emerald Counselling. Our services are crafted to meet your needs—whether you&apos;re navigating individual challenges, relationship dynamics, or family transitions, we&apos;re here to walk with you.
+        </p>
 
-     <section id="services" className="bg-[#fff8ec] py-16 px-6 md:px-12 max-w-6xl mx-auto">
-  <h2 className="text-3xl font-serif font-bold text-[#6a4a2e] mb-4 text-center">
-    Our Services
-  </h2>
-  <p className="text-center text-[#5c3b22] max-w-3xl mx-auto mb-10 text-lg font-light">
-    Discover a path to emotional clarity and personal growth with Emerald Counselling. Our services are crafted to meet your needs—whether you're navigating individual challenges, relationship dynamics, or family transitions, we're here to walk with you.
-  </p>
-
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 text-[#5c3b22]">
-    {/* Individual Counselling */}
-    <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition overflow-hidden">
-      <img src="/IndividualTherapy.jpeg" alt="Individual Counselling" className="w-full h-48 object-cover" />
-      <div className="p-6">
-        <h4 className="font-semibold text-xl mb-2">Individual Counselling</h4>
-        <p className="text-sm">Personalized one-on-one support to help you navigate life’s complexities with clarity and confidence.</p>
-      </div>
-    </div>
-
-    {/* Group Counselling */}
-    <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition overflow-hidden">
-      <img src="/pexels-tima-miroshnichenko-5710922.jpg" alt="Group Counselling" className="w-full h-48 object-cover" />
-      <div className="p-6">
-        <h4 className="font-semibold text-xl mb-2">Group Counselling</h4>
-        <p className="text-sm">Healing through shared experiences—connect with others in a safe, guided space for growth and reflection.</p>
-      </div>
-    </div>
-
-    {/* Marital Counselling */}
-    <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition overflow-hidden">
-      <img src="/pexels-shkrabaanthony-7579115.jpg" alt="Marital Counselling" className="w-full h-48 object-cover" />
-      <div className="p-6">
-        <h4 className="font-semibold text-xl mb-2">Marital Counselling</h4>
-        <p className="text-sm">Rebuild trust, enhance communication, and rediscover intimacy with compassionate, goal-oriented sessions.</p>
-      </div>
-    </div>
-
-    {/* Family Counselling */}
-    <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition overflow-hidden">
-      <img src="/pexels-gustavo-fring-7447260.jpg" alt="Family Counselling" className="w-full h-48 object-cover" />
-      <div className="p-6">
-        <h4 className="font-semibold text-xl mb-2">Family Counselling</h4>
-        <p className="text-sm">Strengthen bonds and navigate transitions as a family with collaborative, supportive guidance.</p>
-      </div>
-    </div>
-
-    {/* Substance Abuse Counselling */}
-    <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition overflow-hidden">
-      <img src="/pexels-mart-production-7231461.jpg" alt="Substance Abuse Counselling" className="w-full h-48 object-cover" />
-      <div className="p-6">
-        <h4 className="font-semibold text-xl mb-2">Substance Abuse Counselling</h4>
-        <p className="text-sm">Compassionate support and practical tools to help individuals overcome addiction and reclaim control of their lives.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 text-[#5c3b22]">
+          {[
+            {
+              title: 'Individual Counselling',
+              desc: 'Personalized one-on-one support to help you navigate life’s complexities with clarity and confidence.',
+              img: '/IndividualTherapy.jpeg',
+            },
+            {
+              title: 'Group Counselling',
+              desc: 'Healing through shared experiences—connect with others in a safe, guided space for growth and reflection.',
+              img: '/pexels-tima-miroshnichenko-5710922.jpg',
+            },
+            {
+              title: 'Marital Counselling',
+              desc: 'Rebuild trust, enhance communication, and rediscover intimacy with compassionate, goal-oriented sessions.',
+              img: '/pexels-shkrabaanthony-7579115.jpg',
+            },
+            {
+              title: 'Family Counselling',
+              desc: 'Strengthen bonds and navigate transitions as a family with collaborative, supportive guidance.',
+              img: '/pexels-gustavo-fring-7447260.jpg',
+            },
+            {
+              title: 'Substance Abuse Counselling',
+              desc: 'Compassionate support and practical tools to help individuals overcome addiction and reclaim control of their lives.',
+              img: '/pexels-mart-production-7231461.jpg',
+            },
+          ].map(({ title, desc, img }) => (
+            <div key={title} className="bg-white rounded-xl shadow-md hover:shadow-lg transition overflow-hidden">
+              <Image src={img} alt={title} className="w-full object-cover" width={400} height={192} />
+              <div className="p-6">
+                <h4 className="font-semibold text-xl mb-2">{title}</h4>
+                <p className="text-sm">{desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* Value Proposition */}
-<section className="bg-amber-50 p-8 rounded-lg shadow-md border border-amber-100">
-  <h3 className="text-3xl font-bold text-amber-700 mb-2">Why Choose Emerald Counselling?</h3>
-  <p className="text-amber-900 leading-relaxed">
-    At Emerald Counselling, we believe mental health care should be compassionate, accessible, and affordable. Whether you're navigating personal struggles or seeking support for your family, our tailored sessions are designed to meet you where you are — and walk with you every step of the way.
-  </p>
+      <section className="bg-amber-50 p-8 rounded-lg shadow-md border border-amber-100">
+        <h3 className="text-3xl font-bold text-amber-700 mb-2">Why Choose Emerald Counselling?</h3>
+        <p className="text-amber-900 leading-relaxed">
+          At Emerald Counselling, we believe mental health care should be compassionate, accessible, and affordable. Whether you&apos;re navigating personal struggles or seeking support for your family, our tailored sessions are designed to meet you where you are — and walk with you every step of the way.
+        </p>
 
-  <ul className="mt-6 list-disc list-inside space-y-2 text-amber-800 text-base">
-    <li><strong>Affordable Pricing:</strong> Professional care without the financial strain.</li>
-    <li><strong>Personalized Support:</strong> Every session is tailored to your unique story.</li>
-    <li><strong>Safe & Confidential:</strong> We provide a space where you can speak freely and safely.</li>
-    <li><strong>Flexible Access:</strong> Meet with us online or in-person at your convenience.</li>
-  </ul>
-</section>
-
+        <ul className="mt-6 list-disc list-inside space-y-2 text-amber-800 text-base">
+          <li><strong>Affordable Pricing:</strong> Professional care without the financial strain.</li>
+          <li><strong>Personalized Support:</strong> Every session is tailored to your unique story.</li>
+          <li><strong>Safe &amp; Confidential:</strong> We provide a space where you can speak freely and safely.</li>
+          <li><strong>Flexible Access:</strong> Meet with us online or in-person at your convenience.</li>
+        </ul>
+      </section>
 
       {/* Call to Action */}
       <section className="text-center">
@@ -122,19 +111,20 @@ export default function Home() {
           Request a Quote
         </a>
       </section>
-      {/* Final Uplifting Section */}
-<section
-  className="relative h-96 bg-cover bg-center text-white flex items-center justify-center"
-  style={{ backgroundImage: "url('/pexels-barbara-olsen-7880782.jpg')" }} // Make sure this image exists in your public folder
->
-  <div className="absolute inset-0 bg-black/50"></div>
-  <div className="relative z-10 text-center px-4">
-    <h3 className="text-3xl md:text-4xl font-bold mb-2">Together, we can help your smile shine again</h3>
-    <p className="text-sm md:text-base max-w-xl mx-auto">
-      At Emerald Counselling, healing begins with compassion, courage, and connection. Let’s take that journey—together.
-    </p>
-  </div>
-</section>
+
+      {/* Final Section with Background */}
+      <section
+        className="relative h-96 bg-cover bg-center text-white flex items-center justify-center"
+        style={{ backgroundImage: "url('/pexels-barbara-olsen-7880782.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-black/50"></div>
+        <div className="relative z-10 text-center px-4">
+          <h3 className="text-3xl md:text-4xl font-bold mb-2">Together, we can help your smile shine again</h3>
+          <p className="text-sm md:text-base max-w-xl mx-auto">
+            At Emerald Counselling, healing begins with compassion, courage, and connection. Let&apos;s take that journey—together.
+          </p>
+        </div>
+      </section>
 
     </main>
   );
