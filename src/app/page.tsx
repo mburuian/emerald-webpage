@@ -25,7 +25,7 @@ export default function Home() {
 
           <div className="md:w-1/3">
             <Image
-              src="/istockphoto-1342251913-1024x1024.jpg"
+              src="/IMG-20250605-WA0010.jpg"
               alt="Counselling session"
               className="rounded-lg shadow-lg object-cover"
               width={400}
@@ -33,6 +33,51 @@ export default function Home() {
             />
           </div>
         </div>
+       <section className="relative bg-[#4e3620] text-white overflow-hidden py-20">
+  {/* Top Wave Shape */}
+  <svg
+    className="absolute top-0 left-0 w-full h-16 md:h-24"
+    viewBox="0 0 1440 320"
+    preserveAspectRatio="none"
+  >
+    <path
+      fill="#ffffff"
+      d="M0,128L60,154.7C120,181,240,235,360,229.3C480,224,600,160,720,144C840,128,960,160,1080,165.3C1200,171,1320,149,1380,138.7L1440,128L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"
+    />
+  </svg>
+
+  <div className="relative z-10 container mx-auto px-4 flex flex-col items-center text-center">
+    <div className="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-white shadow-lg mb-6">
+      <Image
+        src="/IMG-20250605-WA0009.jpg"
+        alt="Rosemary Wanjiru"
+        width={192}
+        height={192}
+        className="object-cover w-full h-full"
+      />
+    </div>
+
+    <h2 className="text-3xl md:text-4xl font-serif font-bold underline text-white mb-4">Meet Rosemary</h2>
+
+    <p className="text-base md:text-lg max-w-2xl leading-relaxed text-gray-100">
+      Rosemary Wanjiru is a compassionate systemic therapist who embraces a flexible and integrative
+      approach to meet each client’s unique needs. With empathy and experience, she walks alongside
+      clients to help them find clarity, healing, and renewed strength in their journey.
+    </p>
+  </div>
+
+  {/* Bottom Wave Shape */}
+  <svg
+    className="absolute bottom-0 left-0 w-full h-16 md:h-24"
+    viewBox="0 0 1440 320"
+    preserveAspectRatio="none"
+  >
+    <path
+      fill="#fff8ec"
+      d="M0,64L60,58.7C120,53,240,43,360,64C480,85,600,139,720,144C840,149,960,107,1080,117.3C1200,128,1320,192,1380,224L1440,256L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
+    />
+  </svg>
+</section>
       </section>
 
       {/* Services Section */}
