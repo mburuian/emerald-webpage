@@ -20,16 +20,16 @@ export default function AdminBlogPostPage() {
   const router = useRouter();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user?.email === ADMIN_EMAIL) {
-        setIsAdmin(true);
-      } else {
-        setIsAdmin(false);
-        router.push("/"); // Redirect if not admin
-      }
-    });
-    return () => unsubscribe();
-  }, []);
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
+    if (user?.email === ADMIN_EMAIL) {
+      setIsAdmin(true);
+    } else {
+      setIsAdmin(false);
+      router.push("/"); // Redirect if not admin
+    }
+  });
+  return () => unsubscribe();
+}, [router]);
 
   const [uploadProgress, setUploadProgress] = useState(0);
 

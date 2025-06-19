@@ -14,13 +14,14 @@ export default function LoginModal({ onCloseAction }: LoginModalProps) {
   const [error, setError] = useState("");
 
   const handleLogin = async () => {
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      onCloseAction(); // Close modal after successful login
-    } catch (err) {
-      setError("Invalid email or password.");
-    }
-  };
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    onCloseAction(); // Close modal after successful login
+  } catch (err) {
+    console.error("Login error:", err);
+    setError("Invalid email or password.");
+  }
+};
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">

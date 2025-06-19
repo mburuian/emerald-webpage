@@ -2,16 +2,16 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut, User } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
 import { Menu, X } from "lucide-react";
-import LoginModal from "./LoginModal"; // Adjust if path differs
+import LoginModal from "./LoginModal";
 
 const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL!;
 
 export default function Navbar() {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [role, setRole] = useState<"admin" | "user" | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -52,7 +52,6 @@ export default function Navbar() {
             {role === "admin" && (
               <Link href="/admin" className="hover:text-gray-300">Admin</Link>
             )}
-
             {user ? (
               <div className="relative group">
                 <button className="hover:text-gray-300">Profile ▾</button>
@@ -101,11 +100,15 @@ export default function Navbar() {
           </div>
         )}
       </nav>
-      {user?.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL && (
-  <Link href="/admin" className="text-sm text-[#6a4a2e] hover:underline">
-    Admin Panel
-  </Link>
-)}
+
+      {/* Optional Admin Panel Link */}
+      {user?.email === ADMIN_EMAIL && (
+        <div className="text-center mt-2">
+          <Link href="/admin" className="text-sm text-[#6a4a2e] hover:underline">
+            Admin Panel
+          </Link>
+        </div>
+      )}
 
       {/* Login Modal */}
       {showLoginModal && (

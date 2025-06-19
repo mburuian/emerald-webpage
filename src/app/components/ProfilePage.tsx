@@ -2,8 +2,15 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { onAuthStateChanged, signOut, updateEmail, updatePassword, User } from "firebase/auth";
+import {
+  onAuthStateChanged,
+  signOut,
+  updateEmail,
+  updatePassword,
+  User,
+} from "firebase/auth";
 import { auth } from "@/lib/firebase";
+import Image from "next/image";
 
 export default function ProfilePage() {
   const [user, setUser] = useState<User | null>(null);
@@ -29,26 +36,57 @@ export default function ProfilePage() {
     await signOut(auth);
     router.push("/");
   };
+const handleEmailChange = async () => {
+  if (!user) return;
 
-  const handleEmailChange = async () => {
-    if (user) {
-      await updateEmail(user, email);
-      alert("Email updated!");
+  try {
+    await updateEmail(user, email);
+    alert("Email updated!");
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      alert(error.message);
+    } else {
+      alert("An unknown error occurred.");
     }
-  };
+  }
+};
+
 
   const handlePasswordChange = async () => {
-    if (user && newPassword.length >= 6) {
-      await updatePassword(user, newPassword);
-      alert("Password updated!");
+  if (!user) {
+    alert("No user is logged in.");
+    return;
+  }
+
+  if (newPassword.length < 6) {
+    alert("Password must be at least 6 characters long.");
+    return;
+  }
+
+  try {
+    await updatePassword(user, newPassword);
+    alert("Password updated!");
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      alert(error.message);
+    } else {
+      alert("An unknown error occurred.");
     }
-  };
+  }
+};
+
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
-      reader.onloadend = () => setProfileImage(reader.result as string);
+     reader.onloadend = () => {
+  const result = reader.result;
+  if (typeof result === "string") {
+    setProfileImage(result);
+  }
+};
+
       reader.readAsDataURL(file);
     }
   };
@@ -60,13 +98,24 @@ export default function ProfilePage() {
 
         <div className="flex flex-col items-center space-y-3">
           {profileImage ? (
-            <img src={profileImage} alt="Profile" className="w-24 h-24 rounded-full object-cover border-4 border-[#6a4a2e]" />
+            <Image
+              src={profileImage}
+              alt="Profile"
+              width={96}
+              height={96}
+              className="rounded-full border-4 border-[#6a4a2e] object-cover"
+            />
           ) : (
             <div className="w-24 h-24 rounded-full bg-gray-300 flex items-center justify-center text-white text-xl font-semibold">
               {user?.email?.charAt(0).toUpperCase()}
             </div>
           )}
-          <input type="file" accept="image/*" onChange={handleImageUpload} className="text-sm" />
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            className="text-sm"
+          />
         </div>
 
         <div className="mt-6 text-left">
@@ -77,7 +126,10 @@ export default function ProfilePage() {
             className="w-full mt-1 p-2 border rounded"
             type="email"
           />
-          <button onClick={handleEmailChange} className="w-full mt-2 bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+          <button
+            onClick={handleEmailChange}
+            className="w-full mt-2 bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+          >
             Update Email
           </button>
         </div>
@@ -90,7 +142,10 @@ export default function ProfilePage() {
             className="w-full mt-1 p-2 border rounded"
             type="password"
           />
-          <button onClick={handlePasswordChange} className="w-full mt-2 bg-green-600 text-white py-2 rounded hover:bg-green-700">
+          <button
+            onClick={handlePasswordChange}
+            className="w-full mt-2 bg-green-600 text-white py-2 rounded hover:bg-green-700"
+          >
             Update Password
           </button>
         </div>

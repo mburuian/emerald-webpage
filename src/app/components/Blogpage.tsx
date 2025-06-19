@@ -8,11 +8,12 @@ import {
   query,
   updateDoc,
   doc,
-  serverTimestamp,
   increment,
 } from "firebase/firestore";
 import { db, auth } from "@/lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import { Timestamp } from "firebase/firestore";
+import Image from "next/image";
 import CommentSection from "@/app/components/CommentSection";
 import {
   Facebook,
@@ -27,7 +28,7 @@ interface BlogPost {
   content: string;
   imageUrl?: string;
   audioUrl?: string;
-  createdAt: any;
+  createdAt: Timestamp;
   likes: number;
   likedBy: string[];
 }
@@ -90,12 +91,16 @@ export default function BlogPage() {
             <p className="text-gray-700">{post.content}</p>
 
             {post.imageUrl && (
-              <img
-                src={post.imageUrl}
-                alt={post.title}
-                className="w-full h-64 object-cover rounded"
-              />
-            )}
+  <div className="relative w-full h-64 rounded overflow-hidden">
+    <Image
+      src={post.imageUrl}
+      alt={post.title}
+      layout="fill"
+      objectFit="cover"
+      className="rounded"
+    />
+  </div>
+)}
 
             {post.audioUrl && (
               <audio controls className="w-full mt-2">

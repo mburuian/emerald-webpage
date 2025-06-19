@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { QuerySnapshot, DocumentData } from "firebase/firestore"; 
 import {
   collection,
   addDoc,
@@ -10,12 +11,13 @@ import {
   orderBy,
 } from "firebase/firestore";
 import { db, auth } from "@/lib/firebase";
+import { Timestamp } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 
 interface Comment {
-  id: string;
+  id: string; 
   text: string;
-  createdAt: any;
+  createdAt: Timestamp | null;
   userId: string;
   username?: string;
 }
@@ -44,14 +46,15 @@ const CommentSection = ({ postId, showUsername = false }: CommentSectionProps) =
 
     const commentsRef = collection(db, "blogPosts", postId, "comments");
     const q = query(commentsRef, orderBy("createdAt", "asc"));
-    const unsubscribeComments = onSnapshot(q, (snapshot) => {
-      setComments(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...(doc.data() as Omit<Comment, "id">),
-        }))
-      );
-    });
+    const unsubscribeComments = onSnapshot(q, (snapshot: QuerySnapshot<DocumentData>) => {
+  setComments(
+    snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...(doc.data() as Omit<Comment, "id">),
+    }))
+  );
+});
+
 
     return () => {
       unsubscribeAuth();
@@ -105,7 +108,10 @@ const CommentSection = ({ postId, showUsername = false }: CommentSectionProps) =
             )}
             <p>{comment.text}</p>
             <span className="text-xs text-gray-500">
-              {comment.createdAt?.toDate?.().toLocaleString?.() || "Just now"}
+             {comment.createdAt instanceof Date
+  ? comment.createdAt.toLocaleString()
+  : comment.createdAt?.toDate?.()?.toLocaleString?.() || "Just now"}
+
             </span>
           </li>
         ))}

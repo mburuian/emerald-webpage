@@ -94,7 +94,7 @@ export default function Home() {
             {
               title: 'Individual Counselling',
               desc: 'Personalized one-on-one support to help you navigate life’s complexities with clarity and confidence.',
-              img: '/IndividualTherapy.jpeg',
+              img: '/IMG-20250616-WA0227.jpg',
             },
             {
               title: 'Group Counselling',
@@ -104,7 +104,7 @@ export default function Home() {
             {
               title: 'Marital Counselling',
               desc: 'Rebuild trust, enhance communication, and rediscover intimacy with compassionate, goal-oriented sessions.',
-              img: '/pexels-shkrabaanthony-7579115.jpg',
+              img: '/IMG-20250616-WA0228.jpg',
             },
             {
               title: 'Family Counselling',
@@ -112,10 +112,11 @@ export default function Home() {
               img: '/pexels-gustavo-fring-7447260.jpg',
             },
             {
-              title: 'Substance Abuse Counselling',
-              desc: 'Compassionate support and practical tools to help individuals overcome addiction and reclaim control of their lives.',
-              img: '/pexels-mart-production-7231461.jpg',
-            },
+  title: 'Mentorship',
+  desc: 'Personalized guidance and encouragement to help individuals grow, set meaningful goals, and navigate life’s challenges with confidence.',
+  img: '/pexels-mart-production-7231461.jpg',
+}
+
           ].map(({ title, desc, img }) => (
             <div key={title} className="bg-white rounded-xl shadow-md hover:shadow-lg transition overflow-hidden">
               <Image src={img} alt={title} className="w-full object-cover" width={400} height={192} />

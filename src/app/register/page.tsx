@@ -3,7 +3,14 @@
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "@/lib/firebase";
-import { doc, setDoc } from "firebase/firestore";
+import {
+  doc,
+  setDoc,
+  query,
+  collection,
+  where,
+  getDocs,
+} from "firebase/firestore";
 import { useRouter } from "next/navigation";
 
 const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
@@ -15,31 +22,60 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [usernameChecking, setUsernameChecking] = useState(false);
+  const [isUsernameAvailable, setIsUsernameAvailable] = useState<boolean | null>(null);
+
   const router = useRouter();
+
+  const checkUsernameAvailability = async (name: string) => {
+    setUsernameChecking(true);
+    try {
+      const q = query(collection(db, "users"), where("username", "==", name.trim()));
+      const snapshot = await getDocs(q);
+      setIsUsernameAvailable(snapshot.empty);
+    } catch (err) {
+      console.error("Error checking username:", err);
+      setIsUsernameAvailable(null);
+    }
+    setUsernameChecking(false);
+  };
+
+  const handleUsernameChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setUsername(value);
+    if (value.trim().length >= 3) {
+      await checkUsernameAvailability(value);
+    } else {
+      setIsUsernameAvailable(null);
+    }
+  };
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (isUsernameAvailable === false) {
+      alert("Username is already taken. Please choose another.");
+      return;
+    }
+
     setLoading(true);
     try {
       const userCred = await createUserWithEmailAndPassword(auth, email, password);
 
       await setDoc(doc(db, "users", userCred.user.uid), {
         uid: userCred.user.uid,
-        fullName,
-        username,
-        phoneNumber,
-        email,
-        role: email === ADMIN_EMAIL ? "admin" : "user",
+        fullName: fullName.trim(),
+        username: username.trim(),
+        phoneNumber: phoneNumber.trim(),
+        email: email.trim(),
+        role: email.trim() === ADMIN_EMAIL ? "admin" : "user",
         createdAt: new Date(),
       });
 
-      if (email === ADMIN_EMAIL) {
-        router.push("/admin/blog-post");
-      } else {
-        router.push("/blog");
-      }
-    } catch (err: any) {
-      alert("Registration failed: " + err.message);
+      router.push(email.trim() === ADMIN_EMAIL ? "/admin/blog-post" : "/blog");
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Unknown error occurred.";
+      alert("Registration failed: " + message);
     } finally {
       setLoading(false);
     }
@@ -61,11 +97,21 @@ export default function RegisterPage() {
           <input
             type="text"
             placeholder="Username"
-            className="w-full mb-3 p-2 border rounded"
+            minLength={3}
+            className="w-full mb-1 p-2 border rounded"
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={handleUsernameChange}
             required
           />
+          {usernameChecking && (
+            <p className="text-sm text-yellow-500 mb-2">Checking availability...</p>
+          )}
+          {isUsernameAvailable === true && (
+            <p className="text-sm text-green-600 mb-2">Username is available ✅</p>
+          )}
+          {isUsernameAvailable === false && (
+            <p className="text-sm text-red-600 mb-2">Username is already taken ❌</p>
+          )}
           <input
             type="tel"
             placeholder="Phone Number"
@@ -92,7 +138,7 @@ export default function RegisterPage() {
           />
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || isUsernameAvailable === false}
             className="w-full bg-[#6a4a2e] text-white py-2 rounded hover:bg-[#4b2e19] transition"
           >
             {loading ? "Registering..." : "Register"}

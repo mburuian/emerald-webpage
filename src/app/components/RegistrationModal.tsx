@@ -6,7 +6,7 @@ import { auth, db } from "@/lib/firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { X } from "lucide-react";
-import { query, collection, where, getDocs } from "firebase/firestore";
+
 
 
 const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
@@ -19,38 +19,41 @@ export default function RegistrationModal({ onCloseAction }: { onCloseAction: ()
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const [isUsernameAvailable, setIsUsernameAvailable] = useState(true);
-  const [usernameChecking, setUsernameChecking] = useState(false);
-
+ 
   const handleRegister = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const userCred = await createUserWithEmailAndPassword(auth, email, password);
+  e.preventDefault();
+  setLoading(true);
+  try {
+    const userCred = await createUserWithEmailAndPassword(auth, email, password);
 
-      await setDoc(doc(db, "users", userCred.user.uid), {
-        uid: userCred.user.uid,
-        fullName,
-        username, // ✅ save username
-        phoneNumber,
-        email,
-        role: email === ADMIN_EMAIL ? "admin" : "user",
-        createdAt: new Date(),
-      });
+    await setDoc(doc(db, "users", userCred.user.uid), {
+      uid: userCred.user.uid,
+      fullName,
+      username,
+      phoneNumber,
+      email,
+      role: email === ADMIN_EMAIL ? "admin" : "user",
+      createdAt: new Date(),
+    });
 
-      onCloseAction();
+    onCloseAction();
 
-      if (email === ADMIN_EMAIL) {
-        router.push("/admin/blog-post");
-      } else {
-        router.push("/blog");
-      }
-    } catch (err: any) {
-      alert("Registration failed: " + err.message);
-    } finally {
-      setLoading(false);
+    if (email === ADMIN_EMAIL) {
+      router.push("/admin/blog-post");
+    } else {
+      router.push("/blog");
     }
-  };
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      alert("Registration failed: " + err.message);
+    } else {
+      alert("An unknown error occurred during registration.");
+    }
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
