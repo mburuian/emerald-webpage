@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -99,7 +100,7 @@ export default function Home() {
             {
               title: 'Group Counselling',
               desc: 'Healing through shared experiences—connect with others in a safe, guided space for growth and reflection.',
-              img: '/pexels-tima-miroshnichenko-5710922.jpg',
+              img: '/pexels-tima-miroshnichenko-5710954.jpg',
             },
             {
               title: 'Marital Counselling',
@@ -114,7 +115,7 @@ export default function Home() {
             {
   title: 'Mentorship',
   desc: 'Personalized guidance and encouragement to help individuals grow, set meaningful goals, and navigate life’s challenges with confidence.',
-  img: '/pexels-mart-production-7231461.jpg',
+  img: '/pexels-airamdphoto-15189552.jpg',
 }
 
           ].map(({ title, desc, img }) => (
@@ -150,12 +151,15 @@ export default function Home() {
         <p className="mt-2 text-amber-900">
           Connect with Emerald Counselling today and take the first step toward emotional wellness and clarity.
         </p>
-        <a
-          href="#contact"
-          className="inline-block mt-4 bg-amber-600 text-white py-2 px-6 rounded hover:bg-amber-700 transition"
-        >
-          Request a Quote
-        </a>
+       <div className="mt-8 flex justify-center">
+   
+ <Link href="/Booksession">
+  <button className="mt-10 bg-yellow-700 text-white font-semibold px-8 py-3 rounded-md shadow-lg hover:bg-yellow-800 transition">
+    Get Started
+  </button>
+</Link>
+
+  </div>
       </section>
 
       {/* Final Section with Background */}

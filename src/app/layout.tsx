@@ -53,8 +53,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     Discover how Emerald Counselling empowers your mental wellness journey with personalized, affordable, and empathetic care.
   </p>
   <div className="mt-8 flex justify-center">
-    <Link href="/Booksession">
-
+   
+ <Link href="/Booksession">
   <button className="mt-10 bg-yellow-700 text-white font-semibold px-8 py-3 rounded-md shadow-lg hover:bg-yellow-800 transition">
     Get Started
   </button>

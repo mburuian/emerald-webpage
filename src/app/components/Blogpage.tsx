@@ -9,6 +9,7 @@ import {
   updateDoc,
   doc,
   increment,
+  deleteDoc,
 } from "firebase/firestore";
 import { db, auth } from "@/lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
@@ -20,7 +21,10 @@ import {
   Twitter,
   Send,
   ClipboardCopy,
+  Pencil,
+  Trash2,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface BlogPost {
   id: string;
@@ -36,12 +40,25 @@ interface BlogPost {
 export default function BlogPage() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [userId, setUserId] = useState<string | null>(null);
+  const [role, setRole] = useState<"admin" | "user" | null>(null);
+  const router = useRouter();
 
   const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL || "";
 
   useEffect(() => {
     const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
-      if (user) setUserId(user.uid);
+      if (user) {
+        setUserId(user.uid);
+        if (user.email?.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+          setRole("admin");
+        } else {
+          setRole("user");
+        }
+      } else {
+        setUserId(null);
+        setRole(null);
+      }
     });
 
     const q = query(collection(db, "blogPosts"), orderBy("createdAt", "desc"));
@@ -68,6 +85,21 @@ export default function BlogPage() {
       likes: increment(1),
       likedBy: [...(post.likedBy || []), userId],
     });
+  };
+
+  const handleDelete = async (postId: string) => {
+    if (!confirm("Are you sure you want to delete this post?")) return;
+    try {
+      await deleteDoc(doc(db, "blogPosts", postId));
+      alert("Post deleted.");
+    } catch (error) {
+      console.error("Error deleting post:", error);
+      alert("Failed to delete post.");
+    }
+  };
+
+  const handleEdit = (postId: string) => {
+    router.push(`/edit-post/${postId}`);
   };
 
   return (
@@ -111,7 +143,9 @@ export default function BlogPage() {
               <button
                 onClick={() => handleLike(post)}
                 className={`${
-                  post.likedBy?.includes(userId || "") ? "text-gray-400" : "text-blue-600"
+                  post.likedBy?.includes(userId || "")
+                    ? "text-gray-400"
+                    : "text-blue-600"
                 } hover:underline`}
                 disabled={post.likedBy?.includes(userId || "")}
               >
@@ -163,10 +197,26 @@ export default function BlogPage() {
                 <ClipboardCopy size={16} /> Copy Link
               </button>
             </div>
+
+            {role === "admin" && (
+              <div className="flex gap-2 mt-4">
+                <button
+                  onClick={() => handleEdit(post.id)}
+                  className="flex items-center gap-1 bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+                >
+                  <Pencil size={16} /> Edit
+                </button>
+                <button
+                  onClick={() => handleDelete(post.id)}
+                  className="flex items-center gap-1 bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
+                >
+                  <Trash2 size={16} /> Delete
+                </button>
+              </div>
+            )}
           </div>
         );
       })}
     </div>
   );
 }
-  
