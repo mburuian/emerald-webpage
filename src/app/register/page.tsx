@@ -82,64 +82,79 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-6 rounded-lg w-full max-w-md shadow-lg">
-        <h2 className="text-xl font-bold mb-4 text-center">Register an Account</h2>
-        <form onSubmit={handleRegister}>
-          <input
-            type="text"
-            placeholder="Full Name"
-            className="w-full mb-3 p-2 border rounded"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            required
-          />
-          <input
-            type="text"
-            placeholder="Username"
-            minLength={3}
-            className="w-full mb-1 p-2 border rounded"
-            value={username}
-            onChange={handleUsernameChange}
-            required
-          />
-          {usernameChecking && (
-            <p className="text-sm text-yellow-500 mb-2">Checking availability...</p>
-          )}
-          {isUsernameAvailable === true && (
-            <p className="text-sm text-green-600 mb-2">Username is available ✅</p>
-          )}
-          {isUsernameAvailable === false && (
-            <p className="text-sm text-red-600 mb-2">Username is already taken ❌</p>
-          )}
-          <input
-            type="tel"
-            placeholder="Phone Number"
-            className="w-full mb-3 p-2 border rounded"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            required
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            className="w-full mb-3 p-2 border rounded"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            className="w-full mb-4 p-2 border rounded"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+    <div className="min-h-screen bg-gradient-to-tr from-[#fefefe] to-[#f5f5f5] flex items-center justify-center px-4">
+      <div className="bg-white p-8 rounded-xl shadow-2xl w-full max-w-lg">
+        <h2 className="text-3xl font-bold text-center text-[#4b2e19] mb-6">Create Your Account</h2>
+
+        <form onSubmit={handleRegister} className="space-y-4">
+          <div>
+            <label className="block font-medium text-gray-700">Full Name</label>
+            <input
+              type="text"
+              placeholder="John Doe"
+              className="w-full mt-1 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#6a4a2e]"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block font-medium text-gray-700">Username</label>
+            <input
+              type="text"
+              placeholder="yourname123"
+              minLength={3}
+              className="w-full mt-1 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#6a4a2e]"
+              value={username}
+              onChange={handleUsernameChange}
+              required
+            />
+            {usernameChecking && <p className="text-sm text-yellow-500 mt-1">Checking availability...</p>}
+            {isUsernameAvailable === true && <p className="text-sm text-green-600 mt-1">✅ Username is available</p>}
+            {isUsernameAvailable === false && <p className="text-sm text-red-600 mt-1">❌ Username already taken</p>}
+          </div>
+
+          <div>
+            <label className="block font-medium text-gray-700">Phone Number</label>
+            <input
+              type="tel"
+              placeholder="07xx xxx xxx"
+              className="w-full mt-1 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#6a4a2e]"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block font-medium text-gray-700">Email Address</label>
+            <input
+              type="email"
+              placeholder="you@example.com"
+              className="w-full mt-1 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#6a4a2e]"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block font-medium text-gray-700">Password</label>
+            <input
+              type="password"
+              placeholder="••••••••"
+              className="w-full mt-1 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#6a4a2e]"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+
           <button
             type="submit"
             disabled={loading || isUsernameAvailable === false}
-            className="w-full bg-[#6a4a2e] text-white py-2 rounded hover:bg-[#4b2e19] transition"
+            className="w-full bg-[#6a4a2e] text-white py-2 rounded hover:bg-[#4b2e19] transition font-medium"
           >
             {loading ? "Registering..." : "Register"}
           </button>

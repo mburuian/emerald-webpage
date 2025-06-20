@@ -1,4 +1,3 @@
-// app/book-session/page.tsx
 "use client";
 
 import { useState } from "react";
@@ -32,16 +31,22 @@ export default function BookSession() {
 
   return (
     <main className="max-w-2xl mx-auto p-8">
-      <h1 className="text-3xl font-bold mb-4 text-center">Book a Session</h1>
+      <h1 className="text-4xl font-bold mb-2 text-center text-[#4b2e19]">
+        Book a Session
+      </h1>
+      <p className="text-center text-gray-700 mb-6">
+        Each counseling session costs <strong>Ksh 1,000</strong>. Please fill out the form
+        below and we’ll get back to you shortly.
+      </p>
 
       {submitted ? (
-        <p className="text-green-600 text-center">
+        <p className="text-green-600 text-center text-lg font-medium">
           Thank you! We&apos;ll get back to you soon.
         </p>
       ) : (
         <form
           onSubmit={handleSubmit}
-          className="space-y-4"
+          className="space-y-4 bg-white p-6 rounded shadow-md"
           aria-label="Book a counseling session"
         >
           <input
@@ -73,7 +78,7 @@ export default function BookSession() {
           />
           <button
             type="submit"
-            className="bg-amber-600 hover:bg-amber-700 text-white px-6 py-2 rounded font-semibold"
+            className="w-full bg-[#6a4a2e] hover:bg-[#4b2e19] text-white py-3 rounded font-semibold transition"
           >
             Submit
           </button>
