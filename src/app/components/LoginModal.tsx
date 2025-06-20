@@ -42,10 +42,15 @@ const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
     await signInWithPopup(auth, provider);
     onCloseAction(); // close modal on success
-  } catch (err: any) {
+  } catch (err: unknown) {
+  if (err instanceof Error) {
     console.error("Google login error:", err.message);
-    alert("Google login failed.");
+    alert("Google login failed: " + err.message);
+  } else {
+    console.error("Google login error:", err);
+    alert("Google login failed due to an unknown error.");
   }
+}
 };
 
   return (

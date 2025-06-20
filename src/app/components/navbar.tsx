@@ -102,13 +102,13 @@ export default function Navbar() {
       </nav>
 
       {/* Optional Admin Panel Link */}
-      {user?.email === ADMIN_EMAIL && (
-        <div className="text-center mt-2">
-          <Link href="/admin" className="text-sm text-[#6a4a2e] hover:underline">
-            Admin Panel
-          </Link>
-        </div>
-      )}
+      {role === "admin" && (
+  <div className="text-center mt-2">
+    <Link href="/admin" className="text-sm text-[#6a4a2e] hover:underline">
+      Admin Panel
+    </Link>
+  </div>
+)}
 
       {/* Login Modal */}
       {showLoginModal && (
