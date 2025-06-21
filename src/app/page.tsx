@@ -61,10 +61,11 @@ export default function Home() {
     <h2 className="text-3xl md:text-4xl font-serif font-bold underline text-white mb-4">Meet Rosemary</h2>
 
     <p className="text-base md:text-lg max-w-2xl leading-relaxed text-gray-100">
-      Rosemary Wanjiru is KCPA( kenya Counselling and psychological association ) certified psychologist who is a compassionate  therapist and embraces a flexible,integrative
-      approach to meet each client’s unique needs. With empathy and experience, she walks alongside
-      clients to help them find clarity, healing, and renewed strength in their journey.
-    </p>
+  Rosemary Wanjiru is a KCPA (Kenya Counselling and Psychological Association) certified psychologist who is a compassionate therapist and embraces a flexible, 
+  integrative approach to meet each client’s unique needs. With empathy and experience, 
+  she walks alongside clients to help them find clarity, healing, and renewed strength in their journey.
+</p>
+
   </div>
 
   {/* Bottom Wave Shape */}
