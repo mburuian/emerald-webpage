@@ -117,7 +117,7 @@ export default function BlogPage() {
             id={post.id}
             className="p-4 border rounded shadow bg-white space-y-4"
           >
-            <h2 className="text-xl font-semibold">{post.title}</h2>
+            <h2 className="text-xl font-semibold text-black">{post.title}</h2>
             <p className="text-gray-700">{post.content}</p>
 
             {post.imageUrl && (
@@ -157,7 +157,9 @@ export default function BlogPage() {
               </span>
             </div>
 
-            <CommentSection postId={post.id} showUsername={true} />
+            <div className="text-black">
+              <CommentSection postId={post.id} showUsername={true} />
+            </div>
 
             <div className="flex flex-wrap gap-3 mt-3">
               <a

@@ -61,7 +61,7 @@ export default function Home() {
     <h2 className="text-3xl md:text-4xl font-serif font-bold underline text-white mb-4">Meet Rosemary</h2>
 
     <p className="text-base md:text-lg max-w-2xl leading-relaxed text-gray-100">
-      Rosemary Wanjiru is a compassionate systemic therapist who embraces a flexible and integrative
+      Rosemary Wanjiru is KCPA( kenya Counselling and psychological association ) certified psychologist who is a compassionate  therapist and embraces a flexible,integrative
       approach to meet each client’s unique needs. With empathy and experience, she walks alongside
       clients to help them find clarity, healing, and renewed strength in their journey.
     </p>
@@ -100,12 +100,12 @@ export default function Home() {
             {
               title: 'Group Counselling',
               desc: 'Healing through shared experiences—connect with others in a safe, guided space for growth and reflection.',
-              img: '/pexels-tima-miroshnichenko-5710954.jpg',
+              img: '/IMG-20250620-WA0001.jpg',
             },
             {
               title: 'Marital Counselling',
               desc: 'Rebuild trust, enhance communication, and rediscover intimacy with compassionate, goal-oriented sessions.',
-              img: '/IMG-20250616-WA0228.jpg',
+              img: '/IMG-20250621-WA0008.jpg',
             },
             {
               title: 'Family Counselling',
